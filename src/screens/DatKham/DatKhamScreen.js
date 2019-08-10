@@ -76,7 +76,7 @@ class DatKhamScreen extends React.Component {
     this.setState({ selectedIndex });
   };
 
-  goToPage = name => {
+  goToScreen = name => {
     switch (name) {
       case "Yêu cầu":
         this.props.navigation.navigate("PickRequest");
@@ -95,6 +95,7 @@ class DatKhamScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>{this.props.navigation.getParam("TEST")}</Text>
         <View style={styles.itemInList}>
           <View style={styles.avatarAndNameContainer}>
             <Icon
@@ -125,7 +126,7 @@ class DatKhamScreen extends React.Component {
                 <Text style={{ marginLeft: 10 }}>{i.name}</Text>
               </View>
               <Button
-                onPress={() => this.goToPage(i.name)}
+                onPress={() => this.goToScreen(i.name)}
                 titleStyle={{ color: SELECT_TEXT_CORLOR }}
                 type="clear"
                 title="Chọn"

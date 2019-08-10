@@ -1,18 +1,23 @@
 import React from "react";
-import {
-  createBottomTabNavigator,
-  createAppContainer,
-  createStackNavigator
-} from "react-navigation";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import reduxThunk from "redux-thunk";
+
+import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 
 import HomeScreen from "./src/screens/Home/HomeScreen";
-import ProfileScreen from "./src/screens/ProfileScreen";
+import ProfileScreen from "./src/screens/Profile/ProfileScreen";
+import ProfileStack from "./src/screens/Profile/ProfileStack";
+
+import reducers from "./src/redux/reducers";
+
+import NavigationService from "./NavigationService";
 
 const TabNavigator = createBottomTabNavigator(
   {
-    "Trang chủ": HomeScreen,
-    "Tài khoản": ProfileScreen
+    Home: HomeScreen,
+    Profile: ProfileStack
   },
   {
     animationEnabled: true,
@@ -20,9 +25,9 @@ const TabNavigator = createBottomTabNavigator(
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === "Trang chủ") {
+        if (routeName === "Home") {
           iconName = `heart${focused ? "" : "-o"}`;
-        } else if (routeName === "Tài khoản") {
+        } else if (routeName === "Profile") {
           iconName = `user`;
         }
 
@@ -39,8 +44,18 @@ const TabNavigator = createBottomTabNavigator(
 
 const AppContainer = createAppContainer(TabNavigator);
 
+const store = createStore(reducers, applyMiddleware(reduxThunk));
+
 export default class App extends React.Component {
   render() {
-    return <AppContainer />;
+    return (
+      <Provider store={store}>
+        <AppContainer
+          ref={navigatorRef => {
+            NavigationService.setTopLevelNavigator(navigatorRef);
+          }}
+        />
+      </Provider>
+    );
   }
 }

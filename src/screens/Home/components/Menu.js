@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, Image, ScrollView } from "react-native";
 import { Button, Divider } from "react-native-elements";
 import { withNavigation } from "react-navigation";
+import { connect } from "react-redux";
 
 const buttonStyle = {
   height: 50,
@@ -11,6 +12,10 @@ const buttonStyle = {
 };
 
 class Menu extends React.Component {
+  componentDidUpdate() {
+    console.log("menu componentDidUpdate this.props.auth: ", this.props.auth);
+  }
+
   render() {
     return (
       <>
@@ -52,7 +57,9 @@ class Menu extends React.Component {
           >
             <Text>
               <Text style={{ fontSize: 20 }}>Xin chào, </Text>
-              <Text style={{ fontSize: 20, color: "orange" }}>Thịnh!</Text>
+              <Text style={{ fontSize: 20, color: "orange" }}>
+                {this.props.auth.displayName}
+              </Text>
             </Text>
             <Divider
               style={{
@@ -130,4 +137,6 @@ class Menu extends React.Component {
   }
 }
 
-export default withNavigation(Menu);
+const mapStateToProps = ({ auth }) => ({ auth });
+
+export default connect(mapStateToProps)(withNavigation(Menu));

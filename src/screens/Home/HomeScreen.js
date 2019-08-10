@@ -1,9 +1,10 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Header from "./components/Header";
 import { createStackNavigator } from "react-navigation";
 import { Ionicons } from "@expo/vector-icons";
 
+import AuthLoadingScreen from "../AuthLoading/AuthLoadingScreen";
 import LaySoScreen from "../LaySoScreen";
 import YBaScreen from "../YBaScreen";
 import TuVanScreen from "../TuVanScreen";
@@ -32,9 +33,12 @@ class HomeScreen extends React.Component {
   };
 
   render() {
+    const displayName = this.props.navigation.getParam("userDisplayName");
+
     return (
       <>
-        <Menu />
+        <Text>{this.props.navigation.getParam("userDisplayName")}</Text>
+        <Menu displayName={displayName} />
         <Promotion />
       </>
     );
@@ -43,6 +47,7 @@ class HomeScreen extends React.Component {
 
 const HomeScreenStack = createStackNavigator(
   {
+    // AuthLoading: AuthLoadingScreen,
     Home: HomeScreen,
     LaySo: LaySoScreen,
     YBa: YBaScreen,
@@ -72,8 +77,7 @@ const HomeScreenStack = createStackNavigator(
 
 HomeScreenStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-
-  if (navigation.state.index > 0) {
+  if (navigation.state.index > 1) {
     tabBarVisible = false;
   }
 
