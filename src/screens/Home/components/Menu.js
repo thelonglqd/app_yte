@@ -12,10 +12,6 @@ const buttonStyle = {
 };
 
 class Menu extends React.Component {
-  componentDidUpdate() {
-    console.log("menu componentDidUpdate this.props.auth: ", this.props.auth);
-  }
-
   render() {
     return (
       <>

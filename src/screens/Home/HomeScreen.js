@@ -15,6 +15,7 @@ import AdditionalInfoScreen from "../AdditionalInfoScreen";
 
 import BookAppointment from "../AppointmentBooking/BookAppointment";
 import BookByDoctor from "../AppointmentBooking/BookByDoctor";
+import DoctorDetailScreen from "../AppointmentBooking/BookByDoctor/DoctorDetailScreen";
 import BookByHospital from "../AppointmentBooking/BookByHospital";
 import BookByDepartment from "../AppointmentBooking/BookByDepartment";
 import BookMultiDepartments from "../AppointmentBooking/BookMultiDepartments";
@@ -55,6 +56,7 @@ const HomeScreenStack = createStackNavigator(
     TuVan: TuVanScreen,
     BookAppointment,
     BookByDoctor,
+    DoctorDetailScreen,
     BookByDepartment,
     BookByHospital,
     BookMultiDepartments,
@@ -78,7 +80,6 @@ const HomeScreenStack = createStackNavigator(
 );
 
 HomeScreenStack.navigationOptions = ({ navigation }) => {
-  console.log("navigation.state: ", navigation.state);
   let tabBarVisible = true;
   if (navigation.state.index > 1) {
     tabBarVisible = false;

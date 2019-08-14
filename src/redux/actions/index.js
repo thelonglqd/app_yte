@@ -34,7 +34,6 @@ export const clearRegisterState = () => {
 };
 
 export const login_success = data => {
-  console.log("login success dispatched: ", data);
   NavigationService.navigate("Home");
   return {
     type: AUTHENTICATION_SUCCESS,
