@@ -97,7 +97,7 @@ class Menu extends React.Component {
                   color: "#00977e"
                 }}
                 onPress={() => {
-                  this.props.navigation.navigate("DatKham");
+                  this.props.navigation.navigate("BookAppointment");
                 }}
               />
               <Text>Đặt Khám</Text>

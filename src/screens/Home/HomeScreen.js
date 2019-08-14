@@ -8,14 +8,16 @@ import AuthLoadingScreen from "../AuthLoading/AuthLoadingScreen";
 import LaySoScreen from "../LaySoScreen";
 import YBaScreen from "../YBaScreen";
 import TuVanScreen from "../TuVanScreen";
-import DatKhamScreen from "../DatKham/DatKhamScreen";
 import Menu from "./components/Menu";
 import Promotion from "./components/Promotion";
-import PickLocationScreen from "../DatKham/PickLocationScreen";
-import RequestScreen from "../DatKham/RequestScreen";
-import ServiceScreen from "../DatKham/ServiceScreen";
 import TuVanNewScreen from "../TuVanNewScreen";
 import AdditionalInfoScreen from "../AdditionalInfoScreen";
+
+import BookAppointment from "../AppointmentBooking/BookAppointment";
+import BookByDoctor from "../AppointmentBooking/BookByDoctor";
+import BookByHospital from "../AppointmentBooking/BookByHospital";
+import BookByDepartment from "../AppointmentBooking/BookByDepartment";
+import BookMultiDepartments from "../AppointmentBooking/BookMultiDepartments";
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -47,15 +49,15 @@ class HomeScreen extends React.Component {
 
 const HomeScreenStack = createStackNavigator(
   {
-    // AuthLoading: AuthLoadingScreen,
     Home: HomeScreen,
     LaySo: LaySoScreen,
     YBa: YBaScreen,
     TuVan: TuVanScreen,
-    DatKham: DatKhamScreen,
-    PickRequest: RequestScreen,
-    PickLocation: PickLocationScreen,
-    PickService: ServiceScreen,
+    BookAppointment,
+    BookByDoctor,
+    BookByDepartment,
+    BookByHospital,
+    BookMultiDepartments,
     TuVan: TuVanScreen,
     TuVanNew: TuVanNewScreen,
     AdditionalInfo: AdditionalInfoScreen
@@ -76,6 +78,7 @@ const HomeScreenStack = createStackNavigator(
 );
 
 HomeScreenStack.navigationOptions = ({ navigation }) => {
+  console.log("navigation.state: ", navigation.state);
   let tabBarVisible = true;
   if (navigation.state.index > 1) {
     tabBarVisible = false;
