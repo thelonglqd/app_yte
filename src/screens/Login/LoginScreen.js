@@ -1,8 +1,12 @@
 import React from "react";
-import { View, Text, TextInput, StyleSheet } from "react-native";
-import { Button, Icon } from "react-native-elements";
-import { login } from "../../redux/actions";
+import { Text, TextInput, View, StyleSheet, ScrollView } from "react-native";
+import { Button } from "react-native-elements";
 import { connect } from "react-redux";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import apis from "../../apis";
+
+import { login_success } from "../../redux/actions";
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -18,19 +22,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
     elevation: 8,
-    borderRadius: 5,
     width: "90%",
     minHeight: "40%",
     backgroundColor: "#fff",
     position: "absolute",
     left: 20,
-    top: 170
+    top: 20
   },
   input: {
     fontSize: 18,
     borderBottomWidth: 1,
-    borderColor: "#18bf21",
-    marginBottom: 10
+    borderTopWidth: 1,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
+    borderColor: "#aeaeae",
+    marginTop: 10,
+    padding: 10
   },
   buttonContainer: {
     display: "flex",
@@ -45,115 +52,127 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-around",
     flexDirection: "row"
+  },
+  errorText: {
+    color: "#ea4335"
+  },
+  serverResponseContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10
   }
 });
 
+const LoginSchema = Yup.object().shape({
+  username: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be more than 6 characters")
+    .max(255, "Too Long!")
+    .required("Password is required")
+});
+
 class LoginScreen extends React.Component {
-  state = { username: null, password: null };
+  state = { email: null, name: null, phone: null, password: null };
   static navigationOptions = {
-    title: "Đăng nhập/Đăng kí"
-  };
-
-  handleTextChange = (value, field) => {
-    this.setState({ ...this.state, [field]: value });
-  };
-
-  handleSubmit = () => {
-    this.props.login(this.state);
+    title: "Đăng nhập"
   };
 
   render() {
-    const { isError, message } = this.props.loginState;
     return (
-      <View style={styles.inputContainer}>
-        <View style={styles.socialButtonContainer}>
-          <Button
-            containerStyle={{ width: "40%" }}
-            type="clear"
-            title="Facebook Login"
-            titleStyle={{ marginLeft: 5, fontSize: 14, color: "#3b5998" }}
-            icon={
-              <Icon
-                type="font-awesome"
-                name="facebook-square"
-                size={30}
-                color="#3b5998"
-              />
-            }
-          />
-          <Button
-            containerStyle={{ width: "40%" }}
-            type="clear"
-            title="Google Login"
-            titleStyle={{ marginLeft: 5, fontSize: 14, color: "#ea4335" }}
-            icon={
-              <Icon
-                type="font-awesome"
-                name="google"
-                size={30}
-                color="#ea4335"
-              />
-            }
-          />
-        </View>
-        <TextInput
-          onChangeText={text => this.handleTextChange(text, "username")}
-          value={this.state.username}
-          placeholder="Tên đăng nhập"
-          style={styles.input}
-        />
-        <TextInput
-          onChangeText={text => this.handleTextChange(text, "password")}
-          value={this.state.password}
-          placeholder="Mật khẩu"
-          secureTextEntry
-          style={styles.input}
-        />
-        <View style={styles.buttonContainer}>
-          <Button
-            containerStyle={{ width: "40%" }}
-            titleStyle={styles.buttonTitleStyle}
-            title="Quên mật khẩu ?"
-            type="clear"
-          />
-          <Button
-            containerStyle={{ width: "40%" }}
-            type="clear"
-            titleStyle={styles.buttonTitleStyle}
-            title="Đăng kí"
-            icon={
-              <Icon
-                type="feather"
-                name="arrow-right"
-                size={15}
-                color="#18bf21"
-              />
-            }
-            iconRight
-            onPress={() => {
-              this.props.navigation.navigate("Register");
+      <>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={styles.inputContainer}
+        >
+          <Formik
+            initialValues={{ username: "", password: "" }}
+            onSubmit={(values, actions) => {
+              apis
+                .post("/login/gmail", {
+                  ...values,
+                  client_id: 4,
+                  client_secret: "ZOCrAJAI16VGAXKYt8GzXbJnYGmQgCcODvv8TJOy"
+                })
+                .then(response => {
+                  this.props.login_success(response.data);
+                  let resetAction = StackActions.reset({
+                    index: 0,
+                    actions: [
+                      NavigationActions.navigate({
+                        routeName: "Profile"
+                      })
+                    ]
+                  });
+                  this.props.navigation.dispatch(resetAction);
+                  this.props.navigation.navigate("Home");
+                })
+                .catch(error => {
+                  actions.setFieldError(
+                    "serverError",
+                    error.response.data.message
+                  );
+                })
+                .finally(() => {
+                  actions.setSubmitting(false);
+                });
             }}
-          />
-        </View>
-        <View>
-          <Button onPress={this.handleSubmit} title="Đăng nhập" />
-        </View>
-        {message ? (
-          isError ? (
-            <Text style={{ color: "red" }}>{message}</Text>
-          ) : (
-            <Text style={{ color: "green" }}>{message}</Text>
-          )
-        ) : null}
-        <View />
-      </View>
+            validationSchema={LoginSchema}
+          >
+            {formProps => (
+              <View>
+                <View style={styles.serverResponseContainer}>
+                  <Text style={styles.errorText}>
+                    {formProps.errors.serverError}
+                  </Text>
+                </View>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Email"
+                  onChangeText={formProps.handleChange("username")}
+                  onBlur={formProps.handleBlur("username")}
+                  value={formProps.values.username}
+                />
+                {formProps.errors.username && formProps.touched.username ? (
+                  <Text style={styles.errorText}>
+                    {formProps.errors.username}
+                  </Text>
+                ) : null}
+                <TextInput
+                  secureTextEntry
+                  style={styles.input}
+                  placeholder="Mật khẩu"
+                  onChangeText={formProps.handleChange("password")}
+                  onBlur={formProps.handleBlur("password")}
+                  value={formProps.values.password}
+                />
+                {formProps.errors.password && formProps.touched.password ? (
+                  <Text style={styles.errorText}>
+                    {formProps.errors.password}
+                  </Text>
+                ) : null}
+                <Button
+                  containerStyle={{ marginTop: 10 }}
+                  buttonStyle={{ backgroundColor: "#00977e" }}
+                  onPress={formProps.handleSubmit}
+                  title="Đăng nhập"
+                />
+              </View>
+            )}
+          </Formik>
+        </ScrollView>
+      </>
     );
   }
 }
 
-const mapStateToProp = ({ loginState }) => ({ loginState });
+const mapStateToProps = ({ registerState }) => ({
+  registerState
+});
 
 export default connect(
-  mapStateToProp,
-  { login }
+  mapStateToProps,
+  { login_success }
 )(LoginScreen);

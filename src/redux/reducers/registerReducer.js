@@ -6,15 +6,15 @@ import {
 
 const INITIAL_REGISTER_STATE = {
   isError: false,
-  message: ""
+  data: null
 };
 
 export default (state = INITIAL_REGISTER_STATE, action) => {
   switch (action.type) {
     case REGISTER_SUCCESSFUL:
-      return { isError: false, message: action.payload };
+      return { isError: false, data: action.payload };
     case REGISTER_ERROR:
-      return { isError: true, message: action.payload };
+      return { isError: true, data: action.payload };
     case REGISTER_CLEAR_STATE:
       return INITIAL_REGISTER_STATE;
     default:

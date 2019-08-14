@@ -9,24 +9,21 @@ import {
   LOG_OUT
 } from "./types";
 
+import { SubmissionError } from "redux-form";
+
 import NavigationService from "../../../NavigationService";
 
 export const register = formValues => async (dispatch, getState) => {
   try {
-    await apis.post("/register/gmail", {
+    const response = apis.post("/register/gmail", {
       ...formValues,
       client_id: 4,
       client_secret: "ZOCrAJAI16VGAXKYt8GzXbJnYGmQgCcODvv8TJOy"
     });
-    dispatch({
-      type: REGISTER_SUCCESSFUL,
-      payload: "Đăng kí thành công! Vui lòng kích hoạt tài khoản qua email"
-    });
-  } catch (e) {
-    dispatch({
-      type: REGISTER_ERROR,
-      payload: "Có lỗi xảy ra trong quá trình đăng kí! Vui lòng thử lại"
-    });
+    dispatch({ type: REGISTER_SUCCESSFUL });
+  } catch (error) {
+    dispatch({ type: REGISTER_ERROR });
+    throw new SubmissionError({ email: "TEST ERROR TEXT" });
   }
 };
 
@@ -36,31 +33,13 @@ export const clearRegisterState = () => {
   };
 };
 
-export const login = formValues => async (dispatch, getState) => {
-  try {
-    const response = await apis.post("/login/gmail", {
-      ...formValues,
-      client_id: 4,
-      client_secret: "ZOCrAJAI16VGAXKYt8GzXbJnYGmQgCcODvv8TJOy"
-    });
-
-    const { name, access_token } = response.data.data;
-
-    dispatch({
-      type: AUTHENTICATION_SUCCESS,
-      payload: {
-        name,
-        access_token
-      }
-    });
-
-    NavigationService.resetStackAndNavigate("Profile");
-  } catch (e) {
-    dispatch({
-      type: LOGIN_ERROR,
-      payload: "Có lỗi xảy ra trong quá trình đăng nhập! Vui lòng thử lại"
-    });
-  }
+export const login_success = data => {
+  console.log("login success dispatched: ", data);
+  NavigationService.navigate("Home");
+  return {
+    type: AUTHENTICATION_SUCCESS,
+    payload: data
+  };
 };
 
 export const logout = () => {

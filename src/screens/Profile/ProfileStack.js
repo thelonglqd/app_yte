@@ -26,7 +26,7 @@ const ProfileStack = createStackNavigator(
 
 ProfileStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  if (navigation.state.index > 1) {
+  if (navigation.state.index > 2) {
     tabBarVisible = false;
   }
 

@@ -7,7 +7,6 @@ import { createBottomTabNavigator, createAppContainer } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 
 import HomeScreen from "./src/screens/Home/HomeScreen";
-import ProfileScreen from "./src/screens/Profile/ProfileScreen";
 import ProfileStack from "./src/screens/Profile/ProfileStack";
 
 import reducers from "./src/redux/reducers";

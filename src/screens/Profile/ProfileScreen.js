@@ -80,7 +80,7 @@ class ProfileScreen extends React.Component {
             <View style={styles.buttonContainer}>
               <Button
                 onPress={() => {
-                  this.props.navigation.navigate("Login");
+                  this.props.navigation.navigate("Register");
                 }}
                 buttonStyle={{ backgroundColor: "#00977E" }}
                 title="Đăng nhập/Đăng kí"
