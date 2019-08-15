@@ -46,78 +46,67 @@ const styles = StyleSheet.create({
   }
 });
 
-const users = [
-  {
-    name: "brynn",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg"
-  }
-];
-
 class DoctorCard extends React.Component {
   render() {
     return (
       <Card containerStyle={{ borderColor: "#aeaeae", borderRadius: 10 }}>
-        {users.map((u, i) => {
-          return (
-            <View key={i} style={styles.user}>
-              <View style={{ width: "30%", height: "100%" }}>
-                <Image
-                  style={{ borderRadius: 10, width: "100%", height: "100%" }}
-                  resizeMode="center"
-                  source={{
-                    uri:
-                      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-                  }}
-                />
-              </View>
-              <View style={styles.description}>
-                <Text>{`${this.props.diploma} ${this.props.name}`}</Text>
-                <Text>{this.props.address}</Text>
-                <Text>Đặt lịch khám thứ 6 - 9/8</Text>
-                <View style={styles.badgeContainer}>
-                  <Badge
-                    textStyle={{ fontSize: 16 }}
-                    value="07:30"
-                    status="success"
-                  />
-                  <Badge
-                    textStyle={{ fontSize: 16 }}
-                    value="08:30"
-                    status="error"
-                  />
-                  <Badge
-                    textStyle={{ fontSize: 16 }}
-                    value="09:30"
-                    status="primary"
-                  />
-                  <Badge
-                    textStyle={{ fontSize: 16 }}
-                    value="10:30"
-                    status="warning"
-                  />
-                </View>
-              </View>
-              <View style={styles.doctorDetailBtn}>
-                <Button
-                  type="clear"
-                  onPress={() =>
-                    this.props.navigation.navigate("DoctorDetailScreen", {
-                      doctorId: this.props.doctorId
-                    })
-                  }
-                  icon={
-                    <Icon
-                      size={48}
-                      color="#00977e"
-                      type="ionicon"
-                      name="ios-arrow-forward"
-                    />
-                  }
-                />
-              </View>
+        <View style={styles.user}>
+          <View style={{ width: "30%", height: "100%" }}>
+            <Image
+              style={{ borderRadius: 10, width: "100%", height: "100%" }}
+              resizeMode="center"
+              source={{
+                uri:
+                  "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+              }}
+            />
+          </View>
+          <View style={styles.description}>
+            <Text>{`${this.props.diploma} ${this.props.name}`}</Text>
+            <Text>{this.props.address}</Text>
+            <Text>Đặt lịch khám thứ 6 - 9/8</Text>
+            <View style={styles.badgeContainer}>
+              <Badge
+                textStyle={{ fontSize: 16 }}
+                value="07:30"
+                status="success"
+              />
+              <Badge
+                textStyle={{ fontSize: 16 }}
+                value="08:30"
+                status="error"
+              />
+              <Badge
+                textStyle={{ fontSize: 16 }}
+                value="09:30"
+                status="primary"
+              />
+              <Badge
+                textStyle={{ fontSize: 16 }}
+                value="10:30"
+                status="warning"
+              />
             </View>
-          );
-        })}
+          </View>
+          <View style={styles.doctorDetailBtn}>
+            <Button
+              type="clear"
+              onPress={() =>
+                this.props.navigation.navigate("DoctorDetailScreen", {
+                  doctorId: this.props.doctorId
+                })
+              }
+              icon={
+                <Icon
+                  size={48}
+                  color="#00977e"
+                  type="ionicon"
+                  name="ios-arrow-forward"
+                />
+              }
+            />
+          </View>
+        </View>
       </Card>
     );
   }

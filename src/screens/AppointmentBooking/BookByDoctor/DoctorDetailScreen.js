@@ -1,7 +1,14 @@
 import React from "react";
-import { Text, View, StyleSheet, Image, ActivityIndicator } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  ScrollView
+} from "react-native";
 import { withNavigation } from "react-navigation";
-import { Button, Badge, Divider } from "react-native-elements";
+import { Card, Button, Divider, Badge } from "react-native-elements";
 
 import apis from "../../../apis";
 
@@ -32,7 +39,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     display: "flex",
     flexDirection: "column",
-    width: "60%"
+    width: "60%",
+    height: 200
   },
   badgeContainer: {
     display: "flex",
@@ -41,21 +49,32 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   bookingTime: {
-    marginLeft: 10,
-    padding: 10,
-    alignSelf: "center",
-    height: "15%",
-    width: "90%",
+    borderRadius: 10,
+    marginTop: 120,
+    padding: 20,
+    height: "20%",
+    width: "100%",
     backgroundColor: "#72eaea"
   },
   addressAndPrice: {
-    marginLeft: 10,
-    padding: 10,
-    alignSelf: "center",
-    height: "25%",
-    width: "90%",
+    borderRadius: 10,
+    padding: 20,
+    height: "37%",
+    width: "100%",
     backgroundColor: "#72eaea",
-    marginTop: 20
+    marginTop: 10
+  },
+  imageAndDesContainer: {
+    height: 100,
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "flex-start"
+  },
+  buttonContainer: {
+    height: 100,
+    width: "60%",
+    flex: 1
   }
 });
 
@@ -89,25 +108,35 @@ class DoctorDetailScreen extends React.Component {
 
   render() {
     return this.state.doctor ? (
-      <View style={styles.container}>
-        <View style={styles.doctorInfo}>
-          <View style={styles.avatarContainer}>
+      <Card
+        containerStyle={{
+          minHeight: "65%",
+          borderColor: "#aeaeae",
+          borderRadius: 10
+        }}
+      >
+        <View style={styles.imageAndDesContainer}>
+          <View style={{ width: "30%", height: "100%" }}>
             <Image
-              style={{ width: "100%", height: "100%" }}
-              source={require("../../../../assets/doctor_default_avt.jpg")}
+              style={{ borderRadius: 10, width: "100%", height: "100%" }}
+              resizeMode="center"
+              source={{
+                uri:
+                  "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+              }}
             />
           </View>
           <View style={styles.descriptionContainer}>
             <Text style={{ fontSize: 18, fontWeight: "900" }}>{`${
               this.state.doctor.diploma_name
-            }, ${this.state.doctor.name}`}</Text>
-            <Text>Nguyên trưởng khoa xương khớp bệnh viện Bạch Mai</Text>
+            } ${this.state.doctor.name}`}</Text>
+            <Text>Nguyên trưởng khoa cơ xướng khớp, bệnh viện Bạch Mai</Text>
             <Text>Chủ tịch hội thấp khớp học Việt Nam</Text>
-            <Text>Bác sĩ cho người bệnh từ 14 tuổi trở lên</Text>
+            <Text>Bác sĩ khám cho người bệnh từ 14 tuổi trở lên</Text>
             <Button
-              containerStyle={{ marginTop: 10 }}
+              containerStyle={{ marginTop: 15 }}
               type="outline"
-              title="Gửi ý kiến sau khi khám"
+              title="Gửi ý kiến sau khi đi khám"
             />
           </View>
         </View>
@@ -163,13 +192,16 @@ class DoctorDetailScreen extends React.Component {
           <Divider style={{ marginBottom: 10 }} />
           <Text style={{ fontSize: 18, fontWeight: "900", color: "#aeaeae" }}>
             Giá khám: <Text style={{ color: "black" }}>500.000 Đồng</Text>
+            <Text style={{ color: "blue", textDecorationLine: "underline" }}>
+              (Xem chi tiết)
+            </Text>
           </Text>
           <Text style={{ fontSize: 18, fontWeight: "900", color: "#aeaeae" }}>
             Thanh toán bởi BHYT:{" "}
             <Text style={{ color: "black" }}>230.000 Đồng</Text>
           </Text>
         </View>
-      </View>
+      </Card>
     ) : (
       <ActivityIndicator />
     );

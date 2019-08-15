@@ -83,7 +83,7 @@ const HomeScreenStack = createStackNavigator(
 
 HomeScreenStack.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
-  if (navigation.state.index > 1) {
+  if (navigation.state.index > 5) {
     tabBarVisible = false;
   }
 
