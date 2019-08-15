@@ -17,6 +17,7 @@ import BookAppointment from "../AppointmentBooking/BookAppointment";
 import BookByDoctor from "../AppointmentBooking/BookByDoctor";
 import DoctorDetailScreen from "../AppointmentBooking/BookByDoctor/DoctorDetailScreen";
 import BookByHospital from "../AppointmentBooking/BookByHospital";
+import Booking from "../AppointmentBooking/Booking";
 import BookByDepartment from "../AppointmentBooking/BookByDepartment";
 import BookMultiDepartments from "../AppointmentBooking/BookMultiDepartments";
 
@@ -57,6 +58,7 @@ const HomeScreenStack = createStackNavigator(
     BookAppointment,
     BookByDoctor,
     DoctorDetailScreen,
+    Booking,
     BookByDepartment,
     BookByHospital,
     BookMultiDepartments,

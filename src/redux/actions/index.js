@@ -9,8 +9,6 @@ import {
   LOG_OUT
 } from "./types";
 
-import { SubmissionError } from "redux-form";
-
 import NavigationService from "../../../NavigationService";
 
 export const register = formValues => async (dispatch, getState) => {
@@ -23,7 +21,7 @@ export const register = formValues => async (dispatch, getState) => {
     dispatch({ type: REGISTER_SUCCESSFUL });
   } catch (error) {
     dispatch({ type: REGISTER_ERROR });
-    throw new SubmissionError({ email: "TEST ERROR TEXT" });
+    // throw new SubmissionError({ email: "TEST ERROR TEXT" });
   }
 };
 

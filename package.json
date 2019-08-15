@@ -16,18 +16,18 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-elements": "^1.1.0",
     "react-native-fbsdk": "^1.0.1",
+    "react-native-material-dropdown": "^0.11.1",
+    "react-native-picker": "^4.3.7",
     "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.1",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
-    "redux-form": "^8.1.0",
     "redux-thunk": "^2.3.0",
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1",
-    "faker": "^4.1.0"
+    "babel-preset-expo": "^5.1.1"
   },
   "private": true
 }

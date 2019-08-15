@@ -4,7 +4,7 @@ import { Icon, ButtonGroup, Input, Button } from "react-native-elements";
 
 class BookByDepartment extends React.Component {
   static navigationOptions = {
-    title: "Đặt Khám",
+    title: "Chuyên khoa",
     tabBarVisible: false
   };
 

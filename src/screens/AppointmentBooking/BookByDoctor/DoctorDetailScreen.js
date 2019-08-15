@@ -116,10 +116,38 @@ class DoctorDetailScreen extends React.Component {
             Đặt Lịch Khám Thứ 6 - 9/8
           </Text>
           <View style={styles.badgeContainer}>
-            <Badge value="  07:30  " status="success" />
-            <Badge value="  08:30  " status="error" />
-            <Badge value="  09:30  " status="primary" />
-            <Badge value="  10:30  " status="warning" />
+            <Badge
+              // onPress={() =>
+              //   this.props.navigation.navigate("Booking", { time: "07:30" })
+              // }
+              textStyle={{ fontSize: 18 }}
+              value="07:30"
+              status="success"
+            />
+            <Badge
+              // onPress={() =>
+              //   this.props.navigation.navigate("Booking", { time: "08:30" })
+              // }
+              textStyle={{ fontSize: 18 }}
+              value="08:30"
+              status="error"
+            />
+            <Badge
+              // onPress={() =>
+              //   this.props.navigation.navigate("Booking", { time: "09:30" })
+              // }
+              textStyle={{ fontSize: 18 }}
+              value="09:30"
+              status="primary"
+            />
+            <Badge
+              // onPress={() =>
+              //   this.props.navigation.navigate("Booking", { time: "10:30" })
+              // }
+              textStyle={{ fontSize: 18 }}
+              value="10:30"
+              status="warning"
+            />
           </View>
         </View>
         <View style={styles.addressAndPrice}>
