@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "90%",
     height: "60%",
-    left: 20,
-    top: 300
+    left: "5%",
+    top: "60%"
   },
   itemContainer: {
     display: "flex",
@@ -68,7 +68,7 @@ class MenuItems extends React.Component {
               onPress={() => this.props.navigation.navigate(`${i.routeName}`)}
             >
               <Icon
-                size={100}
+                size={80}
                 color={i.icon.color}
                 type={i.icon.type}
                 name={i.icon.name}
