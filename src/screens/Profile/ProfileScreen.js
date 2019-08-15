@@ -3,6 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { Icon, Button } from "react-native-elements";
 import { connect } from "react-redux";
 import { logout } from "../../redux/actions";
+import { clearUserDisplayName, clearTokens } from "../../common/ultilities";
 
 const styles = StyleSheet.create({
   viewContainerStyle: {
@@ -45,7 +46,11 @@ class ProfileScreen extends React.Component {
   };
 
   handleActions = name => {
-    if (name === "Đăng xuất") this.props.logout();
+    if (name === "Đăng xuất") {
+      clearTokens();
+      clearUserDisplayName();
+      this.props.logout();
+    }
   };
 
   render() {

@@ -3,7 +3,11 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reduxThunk from "redux-thunk";
 
-import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import {
+  createBottomTabNavigator,
+  createSwitchNavigator,
+  createAppContainer
+} from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
 
 import HomeScreen from "./src/screens/Home/HomeScreen";
@@ -12,6 +16,7 @@ import ProfileStack from "./src/screens/Profile/ProfileStack";
 import reducers from "./src/redux/reducers";
 
 import NavigationService from "./NavigationService";
+import AuthLoadingScreen from "./src/screens/AuthLoading/AuthLoadingScreen";
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -41,7 +46,12 @@ const TabNavigator = createBottomTabNavigator(
   }
 );
 
-const AppContainer = createAppContainer(TabNavigator);
+const AppContainer = createAppContainer(
+  createSwitchNavigator({
+    AuthLoading: AuthLoadingScreen,
+    TabNavigator
+  })
+);
 
 const store = createStore(reducers, applyMiddleware(reduxThunk));
 

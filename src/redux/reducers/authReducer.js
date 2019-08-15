@@ -1,4 +1,8 @@
-import { AUTHENTICATION_SUCCESS, LOG_OUT } from "../actions/types";
+import {
+  AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILED,
+  LOG_OUT
+} from "../actions/types";
 
 const INITIAL_AUTH_STATE = {
   isAuthenticated: false,
@@ -15,6 +19,8 @@ export default (state = INITIAL_AUTH_STATE, action) => {
         displayName: action.payload.data.name,
         token: action.payload.data.access_token
       };
+    case AUTHENTICATION_FAILED:
+      return INITIAL_AUTH_STATE;
     case LOG_OUT:
       return INITIAL_AUTH_STATE;
     default:

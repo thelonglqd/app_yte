@@ -4,9 +4,10 @@ import { Button } from "react-native-elements";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import * as SecureStore from "expo-secure-store";
 import apis from "../../apis";
-
 import { login_success } from "../../redux/actions";
+import { setTokens, setUserDisplayName } from "../../common/ultilities";
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -98,6 +99,13 @@ class LoginScreen extends React.Component {
                 })
                 .then(response => {
                   this.props.login_success(response.data);
+                  const {
+                    access_token,
+                    refresh_token,
+                    name
+                  } = response.data.data;
+                  setTokens(access_token, refresh_token);
+                  setUserDisplayName(name);
                   let resetAction = StackActions.reset({
                     index: 0,
                     actions: [

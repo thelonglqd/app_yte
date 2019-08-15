@@ -6,6 +6,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR,
   AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILED,
   LOG_OUT
 } from "./types";
 
@@ -21,7 +22,6 @@ export const register = formValues => async (dispatch, getState) => {
     dispatch({ type: REGISTER_SUCCESSFUL });
   } catch (error) {
     dispatch({ type: REGISTER_ERROR });
-    // throw new SubmissionError({ email: "TEST ERROR TEXT" });
   }
 };
 
@@ -32,10 +32,18 @@ export const clearRegisterState = () => {
 };
 
 export const login_success = data => {
+  console.log("token login success: ", data);
   NavigationService.navigate("Home");
   return {
     type: AUTHENTICATION_SUCCESS,
     payload: data
+  };
+};
+
+export const login_failed = () => {
+  NavigationService.navigate("Home");
+  return {
+    type: AUTHENTICATION_FAILED
   };
 };
 
