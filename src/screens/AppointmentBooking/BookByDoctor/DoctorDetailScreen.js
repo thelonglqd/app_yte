@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  ScrollView
-} from "react-native";
+import { Text, View, StyleSheet, Image } from "react-native";
 import { withNavigation } from "react-navigation";
 import { Card, Button, Divider, Badge } from "react-native-elements";
 
+import Indicator from "../../../common/components/Indicator";
 import apis from "../../../apis";
 
 const styles = StyleSheet.create({
@@ -203,7 +197,7 @@ class DoctorDetailScreen extends React.Component {
         </View>
       </Card>
     ) : (
-      <ActivityIndicator />
+      <Indicator />
     );
   }
 }

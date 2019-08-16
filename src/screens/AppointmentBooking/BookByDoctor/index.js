@@ -2,6 +2,7 @@ import React from "react";
 import { TextInput, View, StyleSheet, ScrollView } from "react-native";
 import { Icon, ButtonGroup, Input, Button } from "react-native-elements";
 
+import Indicator from "../../../common/components/Indicator";
 import DoctorCard from "./components/DoctorCard";
 import apis from "../../../apis";
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
 });
 
 class BookByDoctor extends React.Component {
-  state = { doctors: [] };
+  state = { doctors: null };
   static navigationOptions = {
     title: "Tìm bác sĩ",
     tabBarVisible: false
@@ -60,30 +61,34 @@ class BookByDoctor extends React.Component {
 
   render() {
     console.log(this.state.doctors);
-    return (
-      <View>
-        <View style={styles.searchBoxContainer}>
-          <TextInput placeholder="Tìm kiếm" style={styles.searchBox} />
-        </View>
-        <Button
-          containerStyle={styles.searchBtnContainer}
-          type="clear"
-          icon={<Icon color="#aeaeae" size={30} name="search" />}
-        />
-        <View style={styles.doctorsListContainer}>
-          {this.state.doctors.map(doctor => (
-            <DoctorCard
-              key={doctor.id}
-              doctorId={doctor.id}
-              avatar={doctor.avatar}
-              diploma={doctor.diploma_name}
-              name={doctor.name}
-              address={doctor.address}
-            />
-          ))}
-        </View>
-      </View>
-    );
+    {
+      return this.state.doctors ? (
+        <ScrollView>
+          <View style={styles.searchBoxContainer}>
+            <TextInput placeholder="Tìm kiếm" style={styles.searchBox} />
+          </View>
+          <Button
+            containerStyle={styles.searchBtnContainer}
+            type="clear"
+            icon={<Icon color="#aeaeae" size={30} name="search" />}
+          />
+          <View style={styles.doctorsListContainer}>
+            {this.state.doctors.map(doctor => (
+              <DoctorCard
+                key={doctor.id}
+                doctorId={doctor.id}
+                avatar={doctor.avatar}
+                diploma={doctor.diploma_name}
+                name={doctor.name}
+                address={doctor.address}
+              />
+            ))}
+          </View>
+        </ScrollView>
+      ) : (
+        <Indicator />
+      );
+    }
   }
 }
 

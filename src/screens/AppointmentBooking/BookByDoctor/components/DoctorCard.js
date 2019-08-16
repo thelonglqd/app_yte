@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   description: {
     width: "55%"
   },
-  user: {
+  cardItemsContainer: {
     height: 100,
     display: "flex",
     justifyContent: "space-between",
@@ -50,7 +50,7 @@ class DoctorCard extends React.Component {
   render() {
     return (
       <Card containerStyle={{ borderColor: "#aeaeae", borderRadius: 10 }}>
-        <View style={styles.user}>
+        <View style={styles.cardItemsContainer}>
           <View style={{ width: "30%", height: "100%" }}>
             <Image
               style={{ borderRadius: 10, width: "100%", height: "100%" }}
