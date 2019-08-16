@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { Text, View, StyleSheet, Image, TextInput } from "react-native";
 import { Icon, Card, Button } from "react-native-elements";
+import { ScrollView } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -20,6 +21,26 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
+  },
+  searchBoxContainer: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20
+  },
+  searchBox: {
+    borderWidth: 1,
+    borderColor: "#aeaeae",
+    borderRadius: 20,
+    height: 40,
+    width: "70%",
+    padding: 10
+  },
+  searchBtnContainer: {
+    position: "absolute",
+    top: 17,
+    right: 60
   }
 });
 
@@ -57,57 +78,67 @@ class BookByDepartment extends React.Component {
   };
 
   render() {
-    {
-      return departments.map(dep => (
-        <Card key={dep.name} containerStyle={styles.cardContainer}>
-          <View style={styles.cardItemsContainer}>
-            <View
-              style={{
-                overflow: "hidden",
-                borderRadius: 10,
-                width: "30%",
-                height: "100%"
-              }}
-            >
-              <Image
+    return (
+      <ScrollView>
+        <View style={styles.searchBoxContainer}>
+          <TextInput placeholder="Tìm kiếm" style={styles.searchBox} />
+        </View>
+        <Button
+          containerStyle={styles.searchBtnContainer}
+          type="clear"
+          icon={<Icon color="#aeaeae" size={30} name="search" />}
+        />
+        {departments.map(dep => (
+          <Card key={dep.name} containerStyle={styles.cardContainer}>
+            <View style={styles.cardItemsContainer}>
+              <View
                 style={{
+                  overflow: "hidden",
                   borderRadius: 10,
-                  backgroundColor: "#00977e",
-                  width: "100%",
+                  width: "30%",
                   height: "100%"
                 }}
-                resizeMode="center"
-                source={dep.logo}
-              />
+              >
+                <Image
+                  style={{
+                    borderRadius: 10,
+                    backgroundColor: "#00977e",
+                    width: "100%",
+                    height: "100%"
+                  }}
+                  resizeMode="center"
+                  source={dep.logo}
+                />
+              </View>
+              <View style={styles.description}>
+                <Text style={{ fontSize: 18, fontWeight: "900" }}>
+                  {dep.name}
+                </Text>
+                <Text>{dep.description}</Text>
+              </View>
+              <View style={styles.doctorDetailBtn}>
+                <Button
+                  type="clear"
+                  onPress={() =>
+                    this.props.navigation.navigate("BookByDoctor", {
+                      doctorId: this.props.doctorId
+                    })
+                  }
+                  icon={
+                    <Icon
+                      size={48}
+                      color="#00977e"
+                      type="ionicon"
+                      name="ios-arrow-forward"
+                    />
+                  }
+                />
+              </View>
             </View>
-            <View style={styles.description}>
-              <Text style={{ fontSize: 18, fontWeight: "900" }}>
-                {dep.name}
-              </Text>
-              <Text>{dep.description}</Text>
-            </View>
-            <View style={styles.doctorDetailBtn}>
-              <Button
-                type="clear"
-                onPress={() =>
-                  this.props.navigation.navigate("BookByDoctor", {
-                    doctorId: this.props.doctorId
-                  })
-                }
-                icon={
-                  <Icon
-                    size={48}
-                    color="#00977e"
-                    type="ionicon"
-                    name="ios-arrow-forward"
-                  />
-                }
-              />
-            </View>
-          </View>
-        </Card>
-      ));
-    }
+          </Card>
+        ))}
+      </ScrollView>
+    );
   }
 }
 
