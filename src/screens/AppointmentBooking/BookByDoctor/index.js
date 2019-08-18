@@ -27,7 +27,11 @@ const styles = StyleSheet.create({
     top: 17,
     right: 60
   },
-  doctorsListContainer: {}
+  doctorsListContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });
 
 class BookByDoctor extends React.Component {
@@ -64,14 +68,16 @@ class BookByDoctor extends React.Component {
     {
       return this.state.doctors ? (
         <ScrollView>
-          <View style={styles.searchBoxContainer}>
-            <TextInput placeholder="Tìm kiếm" style={styles.searchBox} />
+          <View>
+            <View style={styles.searchBoxContainer}>
+              <TextInput placeholder="Tìm kiếm" style={styles.searchBox} />
+            </View>
+            <Button
+              containerStyle={styles.searchBtnContainer}
+              type="clear"
+              icon={<Icon color="#aeaeae" size={30} name="search" />}
+            />
           </View>
-          <Button
-            containerStyle={styles.searchBtnContainer}
-            type="clear"
-            icon={<Icon color="#aeaeae" size={30} name="search" />}
-          />
           <View style={styles.doctorsListContainer}>
             {this.state.doctors.map(doctor => (
               <DoctorCard
