@@ -45,7 +45,9 @@ class BookByDoctor extends React.Component {
     apis
       .post("/login/gmail", {
         client_id: 4,
+        // client_id: 5,
         client_secret: "ZOCrAJAI16VGAXKYt8GzXbJnYGmQgCcODvv8TJOy",
+        // client_secret: "78Rdiw9cExVMvJU0seHBSVG0QB0KJCQTQvW7uzW7",
         username: "thelonglqd@gmail.com",
         password: "1234567890"
       })

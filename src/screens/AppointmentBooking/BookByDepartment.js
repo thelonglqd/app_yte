@@ -9,10 +9,11 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   cardItemsContainer: {
-    height: 100,
     display: "flex",
     justifyContent: "space-between",
-    flexDirection: "row"
+    flexDirection: "row",
+    width: "100%",
+    aspectRatio: 3 / 1
   },
   description: {
     width: "50%"
