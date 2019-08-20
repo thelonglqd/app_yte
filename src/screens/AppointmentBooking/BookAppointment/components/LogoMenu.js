@@ -1,6 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  Image,
+  Dimensions
+} from "react-native";
 import MenuItems from "./MenuItems";
+import { FLEX_COMMON } from "../../../../common/styles";
+
+const logoWidthAndHeight = Dimensions.get("window").width * 0.4;
 
 const styles = StyleSheet.create({
   container: {
@@ -15,9 +25,17 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#rgba(0, 151, 126, 0.8)"
   },
-  logoContainer: {
-    height: "70%",
-    width: "50%"
+  imageBackGroundStyle: {
+    ...FLEX_COMMON,
+    width: "100%",
+    height: "100%"
+  },
+  imageLogoStyle: {
+    zIndex: 1,
+    backgroundColor: "white",
+    width: logoWidthAndHeight,
+    height: logoWidthAndHeight,
+    borderRadius: logoWidthAndHeight / 2
   }
 });
 
@@ -28,26 +46,12 @@ class LogoMenu extends React.Component {
         <View style={styles.container}>
           <ImageBackground
             source={require("../../../../../assets/book_menu_background.png")}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              height: "100%"
-            }}
+            style={styles.imageBackGroundStyle}
           >
-            <View style={styles.logoContainer}>
-              <Image
-                style={{
-                  zIndex: 1,
-                  backgroundColor: "white",
-                  width: 200,
-                  height: 200,
-                  borderRadius: 100
-                }}
-                source={require("../../../../../assets/the-caduceus.jpg")}
-              />
-            </View>
+            <Image
+              style={styles.imageLogoStyle}
+              source={require("../../../../../assets/the-caduceus.jpg")}
+            />
           </ImageBackground>
         </View>
         <View style={styles.backGroundColorContainer} />

@@ -1,7 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions
+} from "react-native";
 import { Icon } from "react-native-elements";
 import { withNavigation } from "react-navigation";
+import { PRIMARY_COLOR, BACKGROUND_CORLOR } from "../../../../common/styles";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +20,7 @@ const styles = StyleSheet.create({
     alignContent: "space-between",
     position: "absolute",
     width: "90%",
-    height: "60%",
+    height: "40%",
     left: "5%",
     top: "60%"
   },
@@ -22,11 +29,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "45%",
-    height: "45%",
+    width: Dimensions.get("window").width * 0.4,
+    height: Dimensions.get("window").width * 0.3,
     borderWidth: 1,
-    borderColor: "#aeaeae",
+    borderColor: BACKGROUND_CORLOR,
     borderRadius: 15,
+    marginBottom: "5%",
     backgroundColor: "white"
   }
 });
@@ -35,7 +43,7 @@ const items = [
   {
     name: "Tìm bác sĩ",
     routeName: "BookByDoctor",
-    icon: { color: "#00977e", type: "material-community", name: "doctor" }
+    icon: { type: "material-community", name: "doctor" }
   },
   {
     name: "Tìm bệnh viện",
@@ -49,12 +57,12 @@ const items = [
   {
     name: "Chọn chuyên khoa",
     routeName: "BookByDepartment",
-    icon: { color: "#00977e", type: "font-awesome", name: "heartbeat" }
+    icon: { type: "font-awesome", name: "heartbeat" }
   },
   {
     name: "Gọi khám tổ hợp",
     routeName: "BookMultiDepartments",
-    icon: { color: "#00977e", type: "material-community", name: "ambulance" }
+    icon: { type: "material-community", name: "ambulance" }
   }
 ];
 
@@ -69,7 +77,7 @@ class MenuItems extends React.Component {
             >
               <Icon
                 size={80}
-                color={i.icon.color}
+                color={PRIMARY_COLOR}
                 type={i.icon.type}
                 name={i.icon.name}
               />
