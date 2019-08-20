@@ -1,21 +1,30 @@
 import React from "react";
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, StyleSheet } from "react-native";
+
+const styles = StyleSheet.create({
+  imageStyles: {
+    width: "100%",
+    height: undefined,
+    aspectRatio: 2.5 / 1,
+    resizeMode: "stretch"
+  }
+});
 
 const promotionCardStyle = {
-  display: "flex",
-  justifyContent: "center",
-  shadowColor: "#000",
-  shadowOffset: {
-    width: 0,
-    height: 4
-  },
-  shadowOpacity: 0.3,
-  shadowRadius: 4.65,
-  elevation: 8,
-  borderRadius: 5,
-  backgroundColor: "#fff"
+  // display: "flex",
+  // justifyContent: "center",
+  // shadowColor: "#000",
+  // shadowOffset: {
+  //   width: 0,
+  //   height: 4
+  // },
+  // shadowOpacity: 0.3,
+  // shadowRadius: 4.65,
+  // elevation: 8,
+  // borderRadius: 5,
+  // backgroundColor: "#fff"
 };
-//../../../../assets/placeholder.png
+
 class Promotion extends React.Component {
   render() {
     return (
@@ -34,28 +43,19 @@ class Promotion extends React.Component {
           <View style={promotionCardStyle}>
             <Image
               source={require("../../../../assets/menu-up-image.png")}
-              style={{
-                minWidth: "100%",
-                height: "80%"
-              }}
+              style={styles.imageStyles}
             />
           </View>
           <View style={promotionCardStyle}>
             <Image
               source={require("../../../../assets/menu-up-image.png")}
-              style={{
-                minWidth: "100%",
-                height: "80%"
-              }}
+              style={styles.imageStyles}
             />
           </View>
           <View style={promotionCardStyle}>
             <Image
               source={require("../../../../assets/menu-up-image.png")}
-              style={{
-                minWidth: "100%",
-                height: "80%"
-              }}
+              style={styles.imageStyles}
             />
           </View>
         </ScrollView>

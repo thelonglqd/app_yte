@@ -43,7 +43,7 @@ class HomeScreen extends React.Component {
       <>
         <Text>{this.props.navigation.getParam("userDisplayName")}</Text>
         <Menu displayName={displayName} />
-        <Promotion />
+        {/* <Promotion /> */}
       </>
     );
   }
