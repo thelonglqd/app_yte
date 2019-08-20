@@ -2,8 +2,10 @@ import React from "react";
 import { Text, View, StyleSheet, Image, TextInput } from "react-native";
 import { Icon, Card, Button } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
+import EStyleSheet from "react-native-extended-stylesheet";
+import { HEADER_FONT, TEXT_FONT } from "../../common/styles";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   cardContainer: {
     borderColor: "#aeaeae",
     borderRadius: 10
@@ -16,7 +18,10 @@ const styles = StyleSheet.create({
     aspectRatio: 3 / 1
   },
   description: {
-    width: "50%"
+    width: "50%",
+    display: "flex",
+    justifyContent: "space-around",
+    flexDirection: "column"
   },
   doctorDetailBtn: {
     display: "flex",
@@ -42,6 +47,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 17,
     right: 60
+  },
+  hospitalNameText: {
+    fontSize: HEADER_FONT,
+    fontWeight: "800"
+  },
+  hospitalDescriptionText: {
+    fontSize: TEXT_FONT
   }
 });
 
@@ -111,10 +123,10 @@ class BookByHospital extends React.Component {
                 />
               </View>
               <View style={styles.description}>
-                <Text style={{ fontSize: 18, fontWeight: "900" }}>
-                  {dep.name}
+                <Text style={styles.hospitalNameText}>{dep.name}</Text>
+                <Text style={styles.hospitalDescriptionText}>
+                  {dep.description}
                 </Text>
-                <Text>{dep.description}</Text>
               </View>
               <View style={styles.doctorDetailBtn}>
                 <Button

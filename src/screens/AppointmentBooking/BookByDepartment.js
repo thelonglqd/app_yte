@@ -2,8 +2,10 @@ import React from "react";
 import { Text, View, StyleSheet, Image, TextInput } from "react-native";
 import { Icon, Card, Button } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
+import EStyleSheet from "react-native-extended-stylesheet";
+import { HEADER_FONT, TEXT_FONT } from "../../common/styles";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   cardContainer: {
     borderColor: "#aeaeae",
     borderRadius: 10
@@ -16,9 +18,13 @@ const styles = StyleSheet.create({
     aspectRatio: 3 / 1
   },
   description: {
-    width: "50%"
+    width: "50%",
+    display: "flex",
+    justifyContent: "space-around",
+    flexDirection: "column"
   },
   doctorDetailBtn: {
+    // width: "15%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center"
@@ -42,6 +48,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 17,
     right: 60
+  },
+  departMentNameText: {
+    fontSize: HEADER_FONT,
+    fontWeight: "800"
+  },
+  departMentDescriptionText: {
+    fontSize: TEXT_FONT
   }
 });
 
@@ -112,10 +125,10 @@ class BookByDepartment extends React.Component {
                 />
               </View>
               <View style={styles.description}>
-                <Text style={{ fontSize: 18, fontWeight: "900" }}>
-                  {dep.name}
+                <Text style={styles.departMentNameText}>{dep.name}</Text>
+                <Text style={styles.departMentDescriptionText}>
+                  {dep.description}
                 </Text>
-                <Text>{dep.description}</Text>
               </View>
               <View style={styles.doctorDetailBtn}>
                 <Button
@@ -127,7 +140,7 @@ class BookByDepartment extends React.Component {
                   }
                   icon={
                     <Icon
-                      size={48}
+                      size={32}
                       color="#00977e"
                       type="ionicon"
                       name="ios-arrow-forward"

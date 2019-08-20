@@ -26,8 +26,9 @@ class AuthLoadingScreen extends React.Component {
 
   loadGlobalStyle() {
     const { width } = Dimensions.get("window");
+    console.log("widthhhhhhhhhhhhhhhhhh: ", width);
     EStyleSheet.build({
-      $rem: width > 320 ? 14 : 12
+      $rem: width > 420 ? 14 : 12
     });
   }
 

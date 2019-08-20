@@ -2,11 +2,17 @@ import React from "react";
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
 import { withNavigation } from "react-navigation";
 import { Card, Button, Icon, Badge } from "react-native-elements";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 import Indicator from "../../../common/components/Indicator";
 import apis from "../../../apis";
+import {
+  HEADER_FONT,
+  TEXT_FONT,
+  BACKGROUND_CORLOR
+} from "../../../common/styles";
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
@@ -54,6 +60,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "flex-start"
+  },
+  diplomaNameText: {
+    fontSize: HEADER_FONT,
+    fontWeight: "800"
+  },
+  descriptionText: {
+    fontSize: TEXT_FONT
   }
 });
 
@@ -67,9 +80,7 @@ class DoctorDetailScreen extends React.Component {
     apis
       .post("/login/gmail", {
         client_id: 4,
-        // client_id: 5,
         client_secret: "ZOCrAJAI16VGAXKYt8GzXbJnYGmQgCcODvv8TJOy",
-        // client_secret: "78Rdiw9cExVMvJU0seHBSVG0QB0KJCQTQvW7uzW7",
         username: "thelonglqd@gmail.com",
         password: "1234567890"
       })
@@ -92,8 +103,6 @@ class DoctorDetailScreen extends React.Component {
       <ScrollView>
         <Card
           containerStyle={{
-            // width: "90%",
-            // aspectRatio: 2 / 1,
             borderColor: "#aeaeae",
             borderRadius: 10
           }}
@@ -115,23 +124,19 @@ class DoctorDetailScreen extends React.Component {
               />
             </View>
             <View style={styles.descriptionContainer}>
-              <Text style={{ fontSize: 16, fontWeight: "900" }}>{`${
+              <Text style={styles.diplomaNameText}>{`${
                 this.state.doctor.diploma_name
               } ${this.state.doctor.name}`}</Text>
-              <Text style={{ fontSize: 14 }}>
-                Nguyên trưởng khoa cơ xướng khớp, bệnh viện Bạch Mai
-              </Text>
-              <Text style={{ fontSize: 14 }}>
-                Chủ tịch hội thấp khớp học Việt Nam
-              </Text>
-              <Text style={{ fontSize: 14 }}>
-                Bác sĩ khám cho người bệnh từ 14 tuổi trở lên
+              <Text style={styles.descriptionText}>
+                Nguyên trưởng khoa cơ xướng khớp, bệnh viện Bạch Mai. Chủ tịch
+                hội thấp khớp học Việt Nam. Bác sĩ khám cho người bệnh từ 14
+                tuổi trở lên
               </Text>
               <Button
                 buttonStyle={{ borderRadius: 10 }}
                 containerStyle={{ marginTop: "3%", width: "95%" }}
                 type="outline"
-                titleStyle={{ fontSize: 14 }}
+                titleStyle={styles.descriptionText}
                 title="Gửi ý kiến sau khi khám"
               />
             </View>
@@ -153,7 +158,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "07:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="07:30"
               status="success"
             />
@@ -162,7 +167,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "08:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="08:30"
               status="error"
             />
@@ -171,7 +176,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "09:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="09:30"
               status="primary"
             />
@@ -180,7 +185,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "10:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="10:30"
               status="warning"
             />
@@ -189,7 +194,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "10:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="10:30"
               status="warning"
             />
@@ -198,7 +203,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "10:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="10:30"
               status="warning"
             />
@@ -207,7 +212,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "10:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="10:30"
               status="warning"
             />
@@ -216,7 +221,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "10:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="10:30"
               status="warning"
             />
@@ -225,7 +230,7 @@ class DoctorDetailScreen extends React.Component {
               //   this.props.navigation.navigate("Booking", { time: "10:30" })
               // }
               containerStyle={{ marginRight: 5 }}
-              textStyle={{ fontSize: 18 }}
+              textStyle={styles.diplomaNameText}
               value="10:30"
               status="warning"
             />
@@ -241,10 +246,12 @@ class DoctorDetailScreen extends React.Component {
           }}
         >
           <View style={styles.addressAndPrice}>
-            <Text style={{ fontSize: 18, fontWeight: "900" }}>
+            <Text style={styles.diplomaNameText}>
               Bệnh viện đa khoa Hồng Phát
             </Text>
-            <Text style={{ color: "#aeaeae", fontSize: 14 }}>
+            <Text
+              style={{ ...styles.descriptionText, color: BACKGROUND_CORLOR }}
+            >
               Số 219 LÊ DUẨN - HAI BÀ TRƯNG - HÀ NỘI
             </Text>
           </View>
@@ -258,15 +265,26 @@ class DoctorDetailScreen extends React.Component {
             backgroundColor: "#ccf9f9"
           }}
         >
-          <Text style={{ fontSize: 18, fontWeight: "900", color: "#aeaeae" }}>
-            Giá khám: <Text style={{ color: "black" }}>500.000 Đồng</Text>
-            <Text style={{ color: "blue", textDecorationLine: "underline" }}>
+          <Text style={{ ...styles.diplomaNameText, color: BACKGROUND_CORLOR }}>
+            Giá khám:{" "}
+            <Text style={{ ...styles.descriptionText, color: "black" }}>
+              500.000 Đồng
+            </Text>
+            <Text
+              style={{
+                ...styles.descriptionText,
+                color: "blue",
+                textDecorationLine: "underline"
+              }}
+            >
               (Xem chi tiết)
             </Text>
           </Text>
-          <Text style={{ fontSize: 18, fontWeight: "900", color: "#aeaeae" }}>
+          <Text style={{ ...styles.diplomaNameText, color: BACKGROUND_CORLOR }}>
             Thanh toán bởi BHYT:{" "}
-            <Text style={{ color: "black" }}>230.000 Đồng</Text>
+            <Text style={{ ...styles.descriptionText, color: "black" }}>
+              230.000 Đồng
+            </Text>
           </Text>
         </Card>
       </ScrollView>
