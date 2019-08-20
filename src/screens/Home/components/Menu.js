@@ -10,7 +10,16 @@ import {
 import { Button, Divider } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import { connect } from "react-redux";
-import { FLEX_COMMON, SHADOW_BOX } from "../../../common/styles";
+import {
+  PRIMARY_COLOR,
+  BACKGROUND_CORLOR,
+  FLEX_COMMON,
+  SHADOW_BOX,
+  HEADER_FONT,
+  TEXT_FONT,
+  FLEX_ROW
+} from "../../../common/styles";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 const buttonStyle = {
   height: 50,
@@ -19,12 +28,73 @@ const buttonStyle = {
   backgroundColor: "#def9f3"
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   itemAndTextContainer: {
     ...FLEX_COMMON,
     flexDirection: "column"
+  },
+  welComeTextContainer: {
+    ...FLEX_COMMON,
+    height: "40%"
+  },
+  welcomeText: {
+    fontSize: HEADER_FONT
+  },
+  nameText: {
+    fontSize: HEADER_FONT,
+    color: "orange"
+  },
+  normalText: {
+    fontSize: TEXT_FONT
+  },
+  cardContainer: {
+    ...SHADOW_BOX,
+    width: "90%",
+    height: "30%",
+    backgroundColor: "#fff",
+    position: "absolute",
+    left: "7%",
+    top: "27%"
+  },
+  menuItemsContainer: {
+    ...FLEX_ROW,
+    justifyContent: "space-around"
+  },
+  imageStyle: {
+    width: "100%",
+    height: undefined,
+    aspectRatio: 2 / 1,
+    resizeMode: "stretch"
+  },
+  divider: {
+    backgroundColor: BACKGROUND_CORLOR,
+    width: "90%",
+    marginTop: 10
   }
 });
+
+const menuItems = [
+  {
+    name: "Lấy Số",
+    icon: { type: "material", name: "add-location" },
+    navigateScreen: "LaySo"
+  },
+  {
+    name: "Đặt Khám",
+    icon: { type: "material-community", name: "stethoscope" },
+    navigateScreen: "BookAppointment"
+  },
+  {
+    name: "Tư Vấn",
+    icon: { type: "material-community", name: "chat-processing" },
+    navigateScreen: "TuVan"
+  },
+  {
+    name: "Y Bạ",
+    icon: { type: "ionicon", name: "md-paper" },
+    navigateScreen: "YBa"
+  }
+];
 
 class Menu extends React.Component {
   render() {
@@ -33,108 +103,34 @@ class Menu extends React.Component {
         <View backgroundColor="#fff" style={{ alignSelf: "flex-start" }}>
           <Image
             source={require("../../../../assets/menu-up-image.png")}
-            style={{
-              width: "100%",
-              height: undefined,
-              aspectRatio: 2 / 1,
-              resizeMode: "stretch"
-            }}
+            style={styles.imageStyle}
           />
         </View>
-        <View
-          style={{
-            ...SHADOW_BOX,
-            width: "90%",
-            height: "30%",
-            backgroundColor: "#fff",
-            position: "absolute",
-            left: "7%",
-            top: "27%"
-          }}
-        >
-          <View
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "40%"
-            }}
-          >
+        <View style={styles.cardContainer}>
+          <View style={styles.welComeTextContainer}>
             <Text>
-              <Text style={{ fontSize: 20 }}>Xin chào, </Text>
-              <Text style={{ fontSize: 20, color: "orange" }}>
-                {this.props.auth.displayName}
-              </Text>
+              <Text style={styles.welcomeText}>Xin chào, </Text>
+              <Text style={styles.nameText}>{this.props.auth.displayName}</Text>
             </Text>
-            <Divider
-              style={{
-                backgroundColor: "#aeaeae",
-                width: "90%",
-                marginTop: 10
-              }}
-            />
+            <Divider style={styles.divider} />
           </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-around",
-              alignItems: "center"
-            }}
-          >
-            <View style={styles.itemAndTextContainer}>
-              <Button
-                buttonStyle={buttonStyle}
-                icon={{ name: "add-location", color: "#00977e" }}
-                onPress={() => {
-                  this.props.navigation.navigate("LaySo");
-                }}
-              />
-              <Text>Lấy Số</Text>
-            </View>
-            <View style={styles.itemAndTextContainer}>
-              <Button
-                buttonStyle={buttonStyle}
-                icon={{
-                  name: "stethoscope",
-                  type: "material-community",
-                  color: "#00977e"
-                }}
-                onPress={() => {
-                  this.props.navigation.navigate("BookAppointment");
-                }}
-              />
-              <Text>Đặt Khám</Text>
-            </View>
-            <View style={styles.itemAndTextContainer}>
-              <Button
-                buttonStyle={buttonStyle}
-                icon={{
-                  name: "chat-processing",
-                  type: "material-community",
-                  color: "#00977e"
-                }}
-                onPress={() => {
-                  this.props.navigation.navigate("TuVan");
-                }}
-              />
-              <Text>Tư Vấn</Text>
-            </View>
-            <View style={styles.itemAndTextContainer}>
-              <Button
-                buttonStyle={buttonStyle}
-                icon={{
-                  name: "md-paper",
-                  type: "ionicon",
-                  color: "#00977e"
-                }}
-                onPress={() => {
-                  this.props.navigation.navigate("YBa");
-                }}
-              />
-              <Text>Y Bạ</Text>
-            </View>
+          <View style={styles.menuItemsContainer}>
+            {menuItems.map(item => (
+              <View key={item.name} style={styles.itemAndTextContainer}>
+                <Button
+                  buttonStyle={buttonStyle}
+                  icon={{
+                    type: item.icon.type,
+                    name: item.icon.name,
+                    color: PRIMARY_COLOR
+                  }}
+                  onPress={() => {
+                    this.props.navigation.navigate(item.navigateScreen);
+                  }}
+                />
+                <Text style={styles.normalText}>{item.name}</Text>
+              </View>
+            ))}
           </View>
         </View>
       </>

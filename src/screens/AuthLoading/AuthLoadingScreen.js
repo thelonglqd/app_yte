@@ -1,7 +1,8 @@
 import React from "react";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import * as SecureStore from "expo-secure-store";
+import EStyleSheet from "react-native-extended-stylesheet";
 import Indicator from "../../common/components/Indicator";
 import { login_success, login_failed } from "../../redux/actions";
 
@@ -23,7 +24,15 @@ class AuthLoadingScreen extends React.Component {
     return SecureStore.getItemAsync("refresh_token");
   }
 
+  loadGlobalStyle() {
+    const { width } = Dimensions.get("window");
+    EStyleSheet.build({
+      $rem: width > 320 ? 14 : 12
+    });
+  }
+
   _bootstrapAsync = async () => {
+    this.loadGlobalStyle();
     const response = await Promise.all([
       this.loadUserAccessToken(),
       this.loadUserDisplayName(),
