@@ -1,65 +1,48 @@
 import React from "react";
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, Dimensions } from "react-native";
 
 const promotionCardStyle = {
   display: "flex",
-  justifyContent: "center",
-  shadowColor: "#000",
-  shadowOffset: {
-    width: 0,
-    height: 4
-  },
-  shadowOpacity: 0.3,
-  shadowRadius: 4.65,
-  elevation: 8,
-  borderRadius: 5,
-  backgroundColor: "#fff"
+  justifyContent: "center"
+  // shadowColor: "#000",
+  // shadowOffset: {
+  //   width: 0,
+  //   height: 4
+  // },
+  // shadowOpacity: 0.3,
+  // shadowRadius: 4.65,
+  // elevation: 8,
+  // borderRadius: 5,
+  // backgroundColor: "#fff"
 };
 //../../../../assets/placeholder.png
 class Promotion extends React.Component {
   render() {
     return (
-      <>
-        <View
-          style={{
+      <View>
+        <Text>Ưu đãi</Text>
+        <ScrollView
+          horizontal={true}
+          contentContainerStyle={{
             display: "flex",
-            justifyContent: "center",
-            height: "10%",
-            marginLeft: 10
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "space-between"
           }}
         >
-          <Text style={{ fontSize: 15, color: "#000" }}>Ưu đãi</Text>
-        </View>
-        <ScrollView horizontal={true} style={{ width: "100%" }}>
-          <View style={promotionCardStyle}>
+          {[1, 2, 3].map(n => (
             <Image
+              key={n}
               source={require("../../../../assets/menu-up-image.png")}
               style={{
-                minWidth: "100%",
-                height: "80%"
+                width: Dimensions.get("window").width,
+                aspectRatio: 2 / 1,
+                resizeMode: "stretch"
               }}
             />
-          </View>
-          <View style={promotionCardStyle}>
-            <Image
-              source={require("../../../../assets/menu-up-image.png")}
-              style={{
-                minWidth: "100%",
-                height: "80%"
-              }}
-            />
-          </View>
-          <View style={promotionCardStyle}>
-            <Image
-              source={require("../../../../assets/menu-up-image.png")}
-              style={{
-                minWidth: "100%",
-                height: "80%"
-              }}
-            />
-          </View>
+          ))}
         </ScrollView>
-      </>
+      </View>
     );
   }
 }

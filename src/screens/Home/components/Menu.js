@@ -1,8 +1,16 @@
 import React from "react";
-import { Text, View, Image, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Dimensions,
+  StyleSheet
+} from "react-native";
 import { Button, Divider } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import { connect } from "react-redux";
+import { FLEX_COMMON, SHADOW_BOX } from "../../../common/styles";
 
 const buttonStyle = {
   height: 50,
@@ -11,36 +19,37 @@ const buttonStyle = {
   backgroundColor: "#def9f3"
 };
 
+const styles = StyleSheet.create({
+  itemAndTextContainer: {
+    ...FLEX_COMMON,
+    flexDirection: "column"
+  }
+});
+
 class Menu extends React.Component {
   render() {
     return (
       <>
-        <View backgroundColor="#fff">
+        <View backgroundColor="#fff" style={{ alignSelf: "flex-start" }}>
           <Image
             source={require("../../../../assets/menu-up-image.png")}
             style={{
-              minWidth: "100%",
-              height: "60%"
+              width: "100%",
+              height: undefined,
+              aspectRatio: 2 / 1,
+              resizeMode: "stretch"
             }}
           />
         </View>
         <View
           style={{
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 4
-            },
-            shadowOpacity: 0.3,
-            shadowRadius: 4.65,
-            elevation: 8,
-            borderRadius: 5,
+            ...SHADOW_BOX,
             width: "90%",
             height: "30%",
             backgroundColor: "#fff",
             position: "absolute",
-            left: 20,
-            top: 170
+            left: "7%",
+            top: "27%"
           }}
         >
           <View
@@ -74,7 +83,7 @@ class Menu extends React.Component {
               alignItems: "center"
             }}
           >
-            <View>
+            <View style={styles.itemAndTextContainer}>
               <Button
                 buttonStyle={buttonStyle}
                 icon={{ name: "add-location", color: "#00977e" }}
@@ -84,7 +93,7 @@ class Menu extends React.Component {
               />
               <Text>Lấy Số</Text>
             </View>
-            <View>
+            <View style={styles.itemAndTextContainer}>
               <Button
                 buttonStyle={buttonStyle}
                 icon={{
@@ -98,7 +107,7 @@ class Menu extends React.Component {
               />
               <Text>Đặt Khám</Text>
             </View>
-            <View>
+            <View style={styles.itemAndTextContainer}>
               <Button
                 buttonStyle={buttonStyle}
                 icon={{
@@ -112,7 +121,7 @@ class Menu extends React.Component {
               />
               <Text>Tư Vấn</Text>
             </View>
-            <View>
+            <View style={styles.itemAndTextContainer}>
               <Button
                 buttonStyle={buttonStyle}
                 icon={{

@@ -42,8 +42,18 @@ class HomeScreen extends React.Component {
     return (
       <>
         <Text>{this.props.navigation.getParam("userDisplayName")}</Text>
-        <Menu displayName={displayName} />
-        <Promotion />
+        <View
+          style={{
+            height: "100%",
+            padding: "2%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between"
+          }}
+        >
+          <Menu displayName={displayName} />
+          <Promotion />
+        </View>
       </>
     );
   }
